@@ -9,15 +9,16 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import retrofit2.Retrofit;
-import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static RetrofitClient instance = null;
     private Retrofit retrofit;
+    private ApiRequest apiRequest;
 
     private RetrofitClient(){
         retrofit = createRetrofit();
+        apiRequest = retrofit.create(ApiRequest.class);
     }
 
     public static RetrofitClient getInstance(){
@@ -44,5 +45,9 @@ public class RetrofitClient {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit;
+    }
+
+    public ApiRequest getApiRequest(){
+        return apiRequest;
     }
 }

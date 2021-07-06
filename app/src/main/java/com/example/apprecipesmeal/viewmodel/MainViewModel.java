@@ -1,5 +1,8 @@
 package com.example.apprecipesmeal.viewmodel;
 
+import android.util.Log;
+
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -17,6 +20,11 @@ public class MainViewModel extends ViewModel {
 
     public MainViewModel(MealRepository mealRepository){
         this.mealRepository = mealRepository;
+        dataDetailMeal = new MutableLiveData<>();
+    }
+
+    public LiveData<Meal> getMeal(){
+        return  dataDetailMeal;
     }
 
     public void getDetailMeal(){
@@ -33,7 +41,7 @@ public class MainViewModel extends ViewModel {
 
                     @Override
                     public void onFailure(Call<ApiResponse<Meal>> call, Throwable t) {
-
+                        Log.d("BBB",t.getMessage());
                     }
                 });
     }

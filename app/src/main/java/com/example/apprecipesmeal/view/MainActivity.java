@@ -18,6 +18,8 @@ import com.example.apprecipesmeal.model.Meal;
 import com.example.apprecipesmeal.repository.MealRepository;
 import com.example.apprecipesmeal.viewmodel.MainViewModel;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -48,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 mMainBinding.textViewKCalCalories.setText(meal.getCalo());
                 mMainBinding.textViewGamCarBo.setText(meal.getCarbo());
                 mMainBinding.textViewGamProtein.setText(meal.getProtein());
-                mMainBinding.textViewContentIngredients.setText(Html.fromHtml(meal.getIngredient()));
-                mMainBinding.textViewContentRecipePreparation.setText(Html.fromHtml(meal.getInstruction()));
+                mMainBinding.textViewContentIngredients.setText(meal.getIngredient().replace("\\r\\n","\r\n"));
+                mMainBinding.textViewContentRecipePreparation.setText(meal.getInstruction().replace("\\\\r\\\\n","\r\n"));
                 Glide.with(MainActivity.this)
                         .load("https://phatdroid94.000webhostapp.com/" + meal.getImage())
                         .into(mMainBinding.circleImage);

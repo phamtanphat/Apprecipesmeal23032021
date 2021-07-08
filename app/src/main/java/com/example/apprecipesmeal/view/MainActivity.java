@@ -7,9 +7,11 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.apprecipesmeal.R;
 import com.example.apprecipesmeal.databinding.ActivityMainBinding;
 import com.example.apprecipesmeal.model.Meal;
@@ -42,7 +44,15 @@ public class MainActivity extends AppCompatActivity {
         mMainViewModel.getMeal().observe(this, new Observer<Meal>() {
             @Override
             public void onChanged(Meal meal) {
-                Log.d("BBB",meal.toString());
+                mMainBinding.textViewNameMeal.setText(meal.getName());
+                mMainBinding.textViewKCalCalories.setText(meal.getCalo());
+                mMainBinding.textViewGamCarBo.setText(meal.getCarbo());
+                mMainBinding.textViewGamProtein.setText(meal.getProtein());
+                mMainBinding.textViewContentIngredients.setText(Html.fromHtml(meal.getIngredient()));
+                mMainBinding.textViewContentRecipePreparation.setText(Html.fromHtml(meal.getInstruction()));
+                Glide.with(MainActivity.this)
+                        .load("https://phatdroid94.000webhostapp.com/" + meal.getImage())
+                        .into(mMainBinding.circleImage);
             }
         });
 
